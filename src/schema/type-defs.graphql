@@ -1,0 +1,53 @@
+# Queries
+type Query {
+    users: [User!]!
+    posts: [Post!]!
+}
+
+# Mutations
+type Mutation {
+    createUser(data: CreateUserInput!): User!
+}
+
+# Types
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    age: Int
+    posts: [Post!]!
+}
+
+type Post {
+    id: ID!
+    title: String!
+    body: String!
+    published: Boolean!
+    author: User!
+}
+
+type Subscription {
+    count: Int!
+    user: UserSubscriptionPayload!
+}
+
+type UserSubscriptionPayload {
+    mutation: MutationType!
+    data: User!
+}
+
+enum MutationType {
+    CREATED
+    UPDATED
+    DELETED
+}
+
+# Inputs
+input CreateUserInput {
+    name: String!
+    email: String!
+    age: Int
+}
+
+
+
